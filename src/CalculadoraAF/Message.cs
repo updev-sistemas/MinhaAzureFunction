@@ -16,17 +16,12 @@ public class Message
     }
 
     [Function("message")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
     {
         try {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             string? name = req.Query["name"];
-
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonSerializer.Deserialize<dynamic>(requestBody!);
-            
-            name ??= data?.name;
 
             string responseMessage = string.IsNullOrEmpty(name)
                 ? "Esta função acionada por HTTP foi executada com sucesso. Passe um nome na string de consulta ou no corpo da solicitação para uma resposta personalizada."
