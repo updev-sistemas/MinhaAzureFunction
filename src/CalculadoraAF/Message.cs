@@ -16,7 +16,7 @@ public class Message
     }
 
     [Function("message")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
+    public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req)
     {
         try {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
@@ -41,7 +41,7 @@ public class Message
         catch (Exception ex) {
             var dataToResponse = new 
             {
-                Message = ex.Message,
+                ex.Message,
                 Date = DateTime.Now,
                 Application = "FunctionAppParaApresentar",
                 Version = "1.0.0",
