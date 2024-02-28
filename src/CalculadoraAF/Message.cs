@@ -6,16 +6,16 @@ using System.Text.Json;
 
 namespace SA;
 
-public class Calculadora
+public class Message
 {
-    private readonly ILogger<Calculadora> _logger;
+    private readonly ILogger<Message> _logger;
     
-    public Calculadora(ILogger<Calculadora> logger)
+    public Message(ILogger<Message> logger)
     {
         _logger = logger;
     }
 
-    [Function("Calculadora")]
+    [Function("message")]
     public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
     {
         try {
